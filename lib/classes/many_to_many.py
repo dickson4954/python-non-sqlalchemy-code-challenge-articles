@@ -1,7 +1,7 @@
 
 
 class Article:
-    all = []
+    all = list()
 
     def __init__(self, author, magazine, title):
         self.author = author
@@ -19,7 +19,7 @@ class Article:
 class Author:
     def __init__(self, name):
         self.name = name
-        self._articles = []
+        self._articles = list()
         
         
         
@@ -45,6 +45,7 @@ class Author:
         pass
 
     def add_article(self, magazine, title):
+        
         new_article = Article(self, magazine, title)
         self._articles.append(new_article) 
         return new_article
@@ -61,6 +62,14 @@ class Magazine:
     def __init__(self, name, category):
         self.name = name
         self.category = category
+       
+
+        
+
+      
+
+      
+        
     
     def get_name(self):
         return self._name
@@ -82,8 +91,9 @@ class Magazine:
 
 
     def articles(self):
-
         return [article for article in Article.all if article.magazine == self]
+
+       
         
         pass
 
@@ -99,11 +109,26 @@ class Magazine:
         return titles if titles else None
 
     def contributing_authors(self):
-        articles_per_author = defaultdict(int)
+        
+        author_counts = {}
         for article in self.articles():
-            articles_per_author[article.author] += 1
-        contributing_authors = [author for author, count in articles_per_author.items() if count > 2]
+            author = article.author
+            author_counts[author] = author_counts.get(author, 0) + 1
+        
+        contributing_authors = [author for author, count in author_counts.items() if count > 2]
+        
         return contributing_authors if contributing_authors else None
+        
+
+
+      
+        
+        
+    
+        
+        
+        
+       
         
         
         pass
